@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+import os
+import sys
+
+if len(sys.argv) == 1:
+    outFile = sys.stdout
+else:
+    outFile = open(sys.argv[1], 'w')
+
+for x in os.environ:
+    if x in ['USERNAME', 'HOME', 'MANPATH', 'PWD']:
+        continue
+    outFile.write("export {}='{}'\n".format(x, os.environ[x]))

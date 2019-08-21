@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ $# -ne 1 ] && echo "Usage: $0 <dot file>" 1>&2 && exit 1
+[ ! -f $1 ] && echo "$1 doesn't exist" && exit 1
+
+OUT_SVG=`mktemp /tmp/dotview_XXXXX.svg`
+dot -Tsvg "$1" > "$OUT_SVG" && inkscape "$OUT_SVG"
+
+rm -f "$OUT_SVG"
